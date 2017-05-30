@@ -1,0 +1,77 @@
+rule R1 {
+    description: "Fred can DELETE the car ABC123"
+    participant: "org.acme.Driver#Fred"
+    operation: DELETE
+    resource: "org.acme.Car#ABC123"
+    action: ALLOW
+}
+
+rule R2 {
+    description: "regulator with ID Bill can not update a Car if they own it"
+    participant(r): "org.acme.Regulator#Bill"
+    operation: UPDATE
+    resource(c): "org.acme.Car"
+    condition: (c.owner == r)
+    action: DENY
+}
+
+rule R3 {
+    description: "Driver can change the ownership of a car that they own"
+    participant(d): "org.acme.Driver"
+    operation: UPDATE
+    resource(o): "org.acme.Car.owner"
+    condition: (o == d)
+    action: ALLOW
+}
+
+rule R4 {
+    description: "regulators can perform all operations on Cars"
+    participant: "org.acme.Regulator"
+    operation: ALL
+    resource: "org.acme.Car"
+    action: ALLOW
+}
+
+rule R5 {
+    description: "Everyone can read all resources in the org.acme namespace"
+    participant: "ANY"
+    operation: READ
+    resource: "org.acme"
+    action: ALLOW
+}
+
+rule R6 {
+    description: "Drivers can do something in a org.acme.Transaction transaction"
+    participant: "ANY"
+    operation: ALL
+    resource: "org.acme.Car"
+    transaction: "org.acme.Transaction"
+    action: ALLOW
+}
+
+rule R7 {
+    description: "Regulators can do something in a org.acme.Transaction transaction"
+    participant: "ANY"
+    operation: ALL
+    resource: "org.acme.Car"
+    transaction(tx): "org.acme.Transaction"
+    condition: (tx.asset.colour === 'blue')
+    action: ALLOW
+}
+
+rule R8 {
+    description: "Fred can CREATE, READ, and UPDATE the car ABC123"
+    participant: "org.acme.Driver#Fred"
+    operation: CREATE, READ, UPDATE
+    resource: "org.acme.Car#ABC123"
+    action: ALLOW
+}
+
+rule R9 {
+    description: "regulator with ID Bill can not update or delete a Car if they own it"
+    participant(r): "org.acme.Regulator#Bill"
+    operation: UPDATE, DELETE
+    resource(c): "org.acme.Car"
+    condition: (c.owner == r)
+    action: DENY
+}

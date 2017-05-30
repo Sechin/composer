@@ -1,0 +1,95 @@
+@import '../../assets/styles/base/_colors.scss';
+@import '../../assets/styles/base/_variables.scss';
+
+app-editor {
+  display: flex;
+  width: 100%;
+
+  .side-bar {
+    display: flex;
+
+    .error_dot {
+        align-self: center;
+    }
+
+    .files {
+      & > * {
+        padding: $space-medium $space-large;
+      }
+      margin-top: $space-large;
+
+      span {
+        color: $secondary-text;
+      }
+
+      .side-bar-nav {
+        padding: 0;
+
+        .error {
+            color: $first-warning;
+        }
+      }
+    }
+
+    .actions {
+      padding: $space-medium $space-large;
+    }
+  }
+
+  svg.nav-icon {
+      width: 32px;
+      height: 16px;
+  }
+
+  .main-view {
+    .business-network-details {
+      display: flex;
+      height:50px;
+      margin-bottom: 0.5rem;
+
+      .business-network-version {
+        margin-right: $space-smedium;
+        color: $secondary-text;
+      }
+
+      .edit-package-text {
+        font-style: italic;
+      }
+
+      .edit-label{
+        line-height: 2.5rem;
+        font-weight:bold;
+      }
+    }
+
+    .readme {
+      background-color: $white;
+      padding: $space-large;
+      min-height: 63vh;
+      max-height: 63vh;
+      overflow-y: auto;
+    }
+
+    .edit_icon {
+        flex-shrink: 1;
+        align-self: center;
+        padding-top:4px;
+    }
+
+    .delete_icon {
+        flex-shrink: 1;
+        align-self: center;
+        margin-left: auto;
+        padding-top:4px;
+    }
+  }
+
+  .CodeMirror {
+    font-family: Source Code Pro
+
+  }
+  .CodeMirror, .CodeMirror-scroll{
+      min-height:63vh;
+      max-height:63vh;
+    }
+}
